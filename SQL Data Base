@@ -1,0 +1,78 @@
+CREATE TABLE drivers(
+	dlid varchar (10) NOT NULL,
+    pswrd varchar (45) NOT NULL,
+    name varchar(45) NOT NULL,
+    surname varchar (45) NOT NULL,
+    PRIMARY KEY(dlid)
+);
+CREATE TABLE cars(
+	cid int NOT NULL,
+    brand varchar(45) NOT NULL,
+    cyear int NOT NULL,
+    plnum varchar (7),
+    PRIMARY KEY(cid)
+);
+CREATE TABLE tripInfo(
+	driverID int NOT NULL REFERENCES drivers(dlid),
+    carID int NOT NULL REFERENCES cars(cid),
+    distID int NOT NULL REFERENCES tarif(did),
+    dat date NOT NULL,
+    PRIMARY KEY(driverID,carID,distID,dat)
+);
+-- updated
+CREATE TABLE tripInfo(
+	id int NOT NULL AUTO_INCREMENT,
+	driverID int NOT NULL REFERENCES drivers(dlid),
+    carID int NOT NULL REFERENCES cars(cid),
+    distID int NOT NULL REFERENCES tarif(did),
+    dat date NOT NULL,
+    PRIMARY KEY(id)
+);
+CREATE TABLE tarif(
+	did int (5)NOT NULL,
+    root int (5)NOT NULL,
+    price int(5)NOT NULL,
+    PRIMARY KEY(did)
+);
+INSERT INTO tarif (did,root,price) VALUES (1,5,3);
+INSERT INTO tarif (did,root,price) VALUES (2,10,8);
+INSERT INTO tarif (did,root,price) VALUES (3,15,13);
+INSERT INTO tarif (did,root,price) VALUES (4,20,18 );
+INSERT INTO tarif (did,root,price) VALUES (5,25,23);
+INSERT INTO tarif (did,root,price) VALUES (6,30,28);
+INSERT INTO tarif (did,root,price) VALUES (7,35,33);
+SELECT * FROM tarif;
+DROP TABLE IF EXISTS tarif;
+INSERT INTO cars (cid,brand,cyear,plnum) VALUES ('1', 'Mercedes',2001,'KE-1293');
+INSERT INTO cars (cid,brand,cyear,plnum) VALUES ('2', 'Toyota',2015,'MN-1028');
+INSERT INTO cars (cid,brand,cyear,plnum) VALUES ('3', 'Mazda',2005,'DS-2033');
+INSERT INTO cars (cid,brand,cyear,plnum) VALUES ('4', 'Ford',2019,'ML-543');
+INSERT INTO cars (cid,brand,cyear,plnum) VALUES ('5', 'Mazda',2020,'OL-9867');
+INSERT INTO cars (cid,brand,cyear,plnum) VALUES ('6', 'Wolkswagen',1999,'LJ-2394');
+SELECT * FROM cars;
+INSERT INTO drivers (dlid,pswrd,name,surname) VALUES ('12345','asdfghq1','Elina','Krume');
+INSERT INTO drivers (dlid,pswrd,name,surname) VALUES ('12346','zxcvbnm4','Solvite','Aboltina');
+SELECT * FROM drivers;
+DROP TABLE IF EXISTS drivers;
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12345,2,1,'2022.09.12');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12346,6,5,'2022.09.18');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12346,1,2,'2022.01.11');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12346,1,1,'2022.01.11');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12345,5,6,'2022.09.06');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12345,1,1,'2022.09.03');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12345,5,2,'2022.07.21');
+INSERT INTO tripInfo (driverID,carID,distID,dat) VALUES (12345,5,3,'2022.08.25');
+SELECT * FROM tripInfo;
+DROP TABLE IF EXISTS tripInfo;
+SELECT SUM(tarif.price) FROM tarif INNER JOIN tripinfo ON tripinfo.distID=tarif.did AND tripinfo.driverID = "12346";
+-- SELECT SUM(price) FROM tarif WHERE did in(SELECT distID FROM tripinfo WHERE driverID = '12346');
+SELECT distID FROM tripinfo WHERE driverID = '12345';
+
+
+
+
+
+
+
+
+
