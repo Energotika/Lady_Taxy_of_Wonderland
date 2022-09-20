@@ -16,7 +16,7 @@ What the users can do?
 
 <h3> Process Flow: <h3>
 
-![image](https://user-images.githubusercontent.com/108826757/191344156-c8c754f6-4e3d-4ca5-9f2b-3ec7b4d08c71.png)
+![image](https://user-images.githubusercontent.com/108826757/191358602-c1b895d6-71cc-4dc3-a9f2-da126df55ef6.png)
 
 Database structure overview
 ![image](https://user-images.githubusercontent.com/108826757/191344510-4fd7109c-642f-4c2a-a6da-3f487600a840.png)
